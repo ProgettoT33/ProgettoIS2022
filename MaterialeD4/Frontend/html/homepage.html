@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Busy</title>
+</head>
+<body onload="showAnnouncement()">
+  <button id="btn1">Annunci di lavoro attivi</button>
+  <button id="btn2">Crea annuncio</button>
+  <h1 class="titolo" onclick="showAnnouncement()">Annunci di lavoro</h1>
+  <ul></ul>
+  <button id="logout" type="submit">Logout</button>
+  <script>
+
+    btn1.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("http://localhost:8080/homepage")
+    })
+
+    btn2.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("http://localhost:8080/create")
+    })
+
+    const showAnnouncement = () => {
+    fetch('http://localhost:8080/api/announcement')
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      data.forEach(announcement => {
+        const markup = `
+        <li>${announcement.typeofwork}
+          <ul>
+            <li>Data: ${announcement.date.day}/${announcement.date.month}/${announcement.date.year}</li>
+            <li>Orario: ${announcement.starttime.hour}:${announcement.starttime.minutes}-${announcement.endttime.hour}:${announcement.endttime.minutes}</li>
+            <li>Tipo di pagamento: ${announcement.typeofpayment}</li>
+            <li>Descrizione: ${announcement.description}</li>
+            <li>Email offerente: ${announcement.offereremail}</li>
+          </ul>
+        </li>`
+
+        document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+      });
+    })
+    .catch(error => console.log(error));
+    }
+
+    logout.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("http://localhost:8080/")
+    })
+  </script>
+</body>
+</html>
