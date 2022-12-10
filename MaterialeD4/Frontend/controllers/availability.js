@@ -93,7 +93,7 @@ const deleteAllAvailability = (req, res, next) => {
 
 
 const getOneAvailability = (req, res, next) => {
-    var id = req.params.id;
+    var id = req.query.id;
 
     Availability.findOne({_id : id}, (err, data) => {
         if(err || !data) return res.json({message : "Availability doesn't exist"});
@@ -103,7 +103,7 @@ const getOneAvailability = (req, res, next) => {
 
 
 const deleteOneAvailability = (req, res, next) => {
-    var id = req.params.id;
+    var id = req.query.id;
 
     Availability.deleteOne({_id : id}, (err, data) => {
         if(err || !data) return res.json({message : "Availability doesn't exist"});
@@ -112,7 +112,7 @@ const deleteOneAvailability = (req, res, next) => {
 };
 
 const setDate = (req, res, next) => {
-    let id = req.params.id;
+    let id = req.query.id;
 
     var day = req.body.day;
     var month = req.body.month;
@@ -142,7 +142,7 @@ const setDate = (req, res, next) => {
 }
 
 const setStartTime = (req, res, next) => {
-    let id = req.params.id;
+    let id = req.query.id;
 
     var hour = req.body.hour;
     var minutes = req.body.minutes;
@@ -168,7 +168,7 @@ const setStartTime = (req, res, next) => {
 }
 
 const setEndTime = (req, res, next) => {
-    let id = req.params.id;
+    let id = req.query.id;
 
     var hour = req.body.hour;
     var minutes = req.body.minutes;
@@ -194,7 +194,7 @@ const setEndTime = (req, res, next) => {
 }
 
 const setFrequency = (req, res, next) => {
-    let id = req.params.id;
+    let id = req.query.id;
 
     var frequency = req.query.frequency;
     if(frequency != "ogni giorno" ||
@@ -216,7 +216,7 @@ const setFrequency = (req, res, next) => {
 }
 
 const changeAvailability = (req, res, next) => {
-    let id = req.params.id;
+    let id = req.query.id;
 
     var hour1 = req.query.hour1;
     var hour2 = req.query.hour2;

@@ -24,32 +24,47 @@ app.use((req, res, next) => {
 })
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '/html/index.html'));
-});
-
-app.get('/homepage', function(req, res) {
-    res.sendFile(path.join(__dirname, '/html/homepage.html'));
+    res.sendFile(path.join(__dirname, '/html/login.html'));
 });
 
 app.get('/login', function(req, res) {
     res.sendFile(path.join(__dirname, '/html/login.html'));
 });
 
+app.get('/homepage', function(req, res) {
+    res.sendFile(path.join(__dirname, '/html/homepage.html'));
+});
+
+app.get('/registration', function(req, res) {
+    res.sendFile(path.join(__dirname, '/html/registration.html'));
+});
+
 app.get('/create', function(req, res) {
     res.sendFile(path.join(__dirname, '/html/create.html'));
 });
-//app.use('/api/students', students);
-//app.use('/api/v1/booklendings', booklendings);
 
+app.get('/profile', function(req, res) {
+    res.sendFile(path.join(__dirname, '/html/profile.html'));
+});
+
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json');
+
+
+app.use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument)
+);
 
 /* Default 404 handler */
 app.use((req, res) => {
     res.status(404);
-    res.json({ error: 'Not found' });
+    res.json({error: 'Not found'});
 });
 
 const listener = app.listen(process.env.PORT || 3000 , () =>{
-    console.log("Your app is listening on port: " + listener.address().port)
+    console.log("Your app is listening on port: " + listener.address().port);
 });
 
 //import mongoose

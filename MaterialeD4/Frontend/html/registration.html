@@ -1,0 +1,94 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="/html/favicon.ico">
+    <title>Stay Busy</title>
+
+  </head>
+
+  <body>
+    <form id="form">
+      <input type="checkbox" name="student" id="student" class="scelta" onclick="checkedOnClick(this);">
+      <label for="student">Student</label>
+      <input type="checkbox" name="offerer" id="offerer" class="scelta" onclick="checkedOnClick(this);">
+      <label for="offerer">Offerer</label>
+      <br>
+      <input type="text" placeholder="Name" name="name" id="name">
+      <input type="text" placeholder="Surname" name="surname" id="surname">
+      <br>
+      <input type="email" placeholder="Email" name="email" id="email">
+      <input type="text" placeholder="ID Telegram" name="idtelegram" id="idtelegram">
+      <br>
+      <input type="password" placeholder="Password" name="password" id="password">
+      <input type="password" placeholder="Confirm password" name="confirmationpassword" id="confirmationpassword">
+      <br>
+      <input type="checkbox" name="terms" id="terms" class="terms">
+      <label for="terms">Accetto i termini e le condizioni</label>
+      <br>
+      <button type="submit" id="btn">Registrati</button>
+    </form>
+    <button type="submit" id="btn2">Effettua login</button>
+
+    <script>
+      const form = document.getElementById('form');
+
+      function checkedOnClick(el){
+        // Select all checkboxes by class
+        var checkboxesList = document.getElementsByClassName("scelta");
+        for (var i = 0; i < checkboxesList.length; i++) {
+          checkboxesList.item(i).checked = false; // Uncheck all checkboxes
+        }
+
+        el.checked = true; // Checked clicked checkbox
+      }
+  
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+  
+        const prePayload = new FormData(form);
+        const payload = new URLSearchParams(prePayload);
+        console.log([...payload]);
+
+        var checkTerms = document.getElementsByClassName("terms");
+        if(checkTerms.item(0).checked == false){
+          alert("Bisogna accettare i termini e le condizioni");
+        }else{
+          var checkboxesList = document.getElementsByClassName("scelta");
+          if(checkboxesList.item(0).checked === false && checkboxesList.item(1).checked === false){
+            alert("Attenzione, bisogna scegliere il tipo di utente");
+          }else if(checkboxesList.item(0).checked === true){
+            alert("Modalità studente non disponibile");
+          }
+          else{
+            fetch('http://localhost:8080/api/offerer',{
+            method : "POST",
+            body : payload
+            })
+            .then(res => {
+              return res.json().then(data => {
+                if(data.message === 'OK'){
+                  alert("Benvenuto in Stay Busy, ora effettua il login!");
+                  location.replace("http://localhost:8080")
+                }else{
+                  alert("Attenzione, credenziali errate");
+                }
+              })
+            })
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+          }
+        }
+
+        
+      })
+
+      btn2.addEventListener('click', function(e){
+        e.preventDefault();
+
+        location.replace("http://localhost:8080")
+      })
+    </script>
+  </body>
+  
+</html>

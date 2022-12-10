@@ -6,6 +6,6 @@ attualmente fatto, vedere nella cartella routes il file routes, li sono indicati
 Per la questione frontend, attualmente ho creato 4 file html molto banali, giusto per capire se funzionano le API, se volete
 provare a dare un'occhiata e vedere se riuscite a capire il tutto.
 
-Tutto ciò è una bozza, andrà sistemato, dovremmo anche creare un db apposito, intanto dateci un'occhiata.
+Tutto ciò è una bozza, andrà sistemato...
 
 Per aprire la pagina web collegata al server, cercare nella barra di ricerca "http://localhost:8080"

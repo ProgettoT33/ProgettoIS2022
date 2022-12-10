@@ -37,7 +37,7 @@ const deleteAllReferenceOfferer = (req, res, next) => {
 
 
 const getOneReferenceOfferer = (req, res, next) => {
-    let emailO = req.params.emailO;
+    let emailO = req.query.emailO;
     let emailS = req.query.emailS;
 
     Referenceofferer.findOne({studentemail : emailS, offereremail : emailO}, (err, data) => {
@@ -48,7 +48,7 @@ const getOneReferenceOfferer = (req, res, next) => {
 
 
 const deleteOneReferenceOfferer = (req, res, next) => {
-    let emailO = req.params.emailO;
+    let emailO = req.query.emailO;
     let emailS = req.query.emailS;
 
     Referenceofferer.deleteOne({offereremail : emailO, studentemail : emailS}, (err, data) => {

@@ -4,30 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/html/favicon.ico">
     <title>Stay Busy</title>
 </head>
 <body onload="showAnnouncement()">
   <button id="btn1">Annunci di lavoro attivi</button>
   <button id="btn2">Crea annuncio</button>
-  <h1 class="titolo" onclick="showAnnouncement()">Annunci di lavoro</h1>
+  <button id="btn3">Mostra profilo</button>
+  <h1 class="titolo">Annunci di lavoro</h1>
   <ul></ul>
   <button id="logout" type="submit">Logout</button>
   <script>
 
+    var url = window.location;
+
+    var access_token = new URLSearchParams(url.search).get('token');
+    var email = new URLSearchParams(url.search).get('email');
+
     btn1.addEventListener('click', function(e){
       e.preventDefault();
 
-      location.replace("http://localhost:8080/homepage")
+      location.replace("http://localhost:8080/homepage?token="+access_token+"&email="+email)
     })
 
     btn2.addEventListener('click', function(e){
       e.preventDefault();
 
-      location.replace("http://localhost:8080/create")
+      location.replace("http://localhost:8080/create?token="+access_token+"&email="+email)
+    })
+
+    btn3.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email)
     })
 
     const showAnnouncement = () => {
-    fetch('http://localhost:8080/api/announcement')
+    fetch('http://localhost:8080/api/announcement/email?email='+email)
     .then(res => {
       return res.json();
     })

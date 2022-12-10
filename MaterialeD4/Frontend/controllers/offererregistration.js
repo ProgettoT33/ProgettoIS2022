@@ -6,12 +6,6 @@ const checkPasswordRequirements = (password) => {
     return false;
 }
 
-const checkEmailRequirements = (email) => {
-    const test = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-    if(test) return true;
-    return false;
-}
-
 const newOfferer = (req, res, next) => {
     var typeofuser = req.body.typeofuser;
     var termsaccepted = req.body.termsaccepted;
@@ -31,10 +25,6 @@ const newOfferer = (req, res, next) => {
     }
     if(password != confirmationpassword){
         return res.json({message : "Two inserted password are not equal"});
-    }
-    
-    if(!checkEmailRequirements(email)){
-        return res.json({message : "Wrong email"});
     }
     
     if(!checkPasswordRequirements(password)){

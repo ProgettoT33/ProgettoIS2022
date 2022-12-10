@@ -1,113 +1,105 @@
 const Offerer = require("../models/offerer");
-const getAllOfferer = (req, res, next) => {
-    Offerer.find({}, (err, data) => {
-        if(err) return res.json({Error : err});
-        return res.json(data);
-    })
-};
-
-
-const deleteAllOfferer = (req, res, next) => {
-    Offerer.deleteMany({}, (err, data) => {
-        if(err) return res.json({message : "Complete delete failed"});
-        return res.json({message : "Complete delete successful"});
-    })
-};
-
-
+const Announcement = require("../models/announcement");
 const deleteOneOfferer = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
+
+    Announcement.deleteMany({offereremail : email}, (err, data1) => {
+    })
 
     Offerer.deleteOne({email : email}, (err, data) => {
-        if(err || !data) return res.json({message : "Offerer doesn't exist"});
-        return res.json(data);
+        if(err || !data) return res.status(404).json("NOT OK");
+        return res.status(200).json({message : "OK"});
     })
+    
 };
 
-const setIdTelegram = (req, res, next) => {
-    let email = req.params.email;
+const getOneOfferer = (req, res, next) => {
+    let email = req.query.email;
 
-    Offerer.findOneAndUpdate({email : email}, {idtelegram : req.query.id}, {new: true}, function(err, response) {
+    Offerer.findOne({email : email}, (err, data) => {
+        if(err || !data) return res.status(404).json({messagge : "Offerer doesn't exist"});
+        return res.status(200).json(data);
+    })
+}
+
+const setIdTelegram = (req, res, next) => {
+    let email = req.query.email;
+
+    Offerer.findOneAndUpdate({email : email}, {idtelegram : req.body.idtelegram}, {new: true}, function(err, response) {
     if (err) {
-        return res.json({message : "Offerer doesn't exist"});
+        return res.status(404).json({message : "NOT OK"});
     } else {
-        return res.json(response);
+        return res.status(200).json({message : "OK"});
     }});
 }
 
 const setDescription = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
-    Offerer.findOneAndUpdate({email : email}, {description : req.query.description}, {new: true}, function(err, response) {
+    Offerer.findOneAndUpdate({email : email}, {description : req.body.description}, {new: true}, function(err, response) {
     if (err) {
-        return res.json({message : "Offerer doesn't exist"});
+        return res.status(404).json({message : "NOT OK"});
     } else {
-        return res.json(response);
+        return res.status(200).json({message : "OK"});
     }});
 }
 
 const setName = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
-    Offerer.findOneAndUpdate({email : email}, {name : req.query.name}, {new: true}, function(err, response) {
+    Offerer.findOneAndUpdate({email : email}, {name : req.body.name}, {new: true}, function(err, response) {
     if (err) {
-        return res.json({message : "Offerer doesn't exist"});
+        return res.status(404).json({message : "NOT OK"});
     } else {
-        return res.json(response);
+        return res.status(200).json({message : "OK"});
     }});
 }
 
 const setSurname = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
-    Offerer.findOneAndUpdate({email : email}, {surname : req.query.surname}, {new: true}, function(err, response) {
+    Offerer.findOneAndUpdate({email : email}, {surname : req.body.surname}, {new: true}, function(err, response) {
     if (err) {
-        return res.json({message : "Offerer doesn't exist"});
+        return res.status(404).json({message : "NOT OK"});
     } else {
-        return res.json(response);
+        return res.status(200).json({message : "OK"});
     }});
 }
 
 const setPassword = (req, res, next) => {
-    let email = req.params.email;
-    let oldPassword = req.query.old;
-    let newPassword = req.query.new;
-    let newPasswordConfirm = req.query.newnew;
+    let email = req.query.email;
+    let newPassword = req.body.new;
+    let newPasswordConfirm = req.body.newnew;
 
     Offerer.findOne({email : email}, (err, data) => {
-        if(!data){
-            return res.json({message : "Offerer doesn't exist"});
-        }else if(!(data.password == oldPassword)){
-            return res.json({message : "Wrong old password"});
-        }
+        if(!data) return res.status(404).json({message : "Offerer doesn't exist"});
     })
 
     if(newPassword != newPasswordConfirm){
-        return res.json({message : "Two new password are not equal"});
+        return res.status(400).json({message : "Two new password are not equal"});
     }
 
     Offerer.findOneAndUpdate({email : email},{password : newPassword}, {new: true}, function(err, response) {
         if (err) {
-            return res.json({message : "Offerer doesn't exist"});
+            return res.status(404).json({message : "NOT OK"});
         } else {
-            return res.json(response);
+            return res.status(200).json({message : "OK"});
         }});
 }
 
 const addRelatedStudents = (req, res, next) => {
-    let email = req.params.emailO;
+    let email = req.query.emailO;
 
     Offerer.findOne({email : email}, (err, data) => {
-        if(err || !data) return res.json({message : "Offerer doesn't exist"});
+        if(err || !data) return res.status(404).json({message : "Offerer doesn't exist"});
         data.relatedStudentsEmail.push(req.query.emailS);
         data.save();
-        res.json(data);
+        res.status(200).json(data);
     })
 }
 
 module.exports = {
-    getAllOfferer,
-    deleteAllOfferer,
+    getOneOfferer,
     deleteOneOfferer,
     setIdTelegram,
     setDescription,

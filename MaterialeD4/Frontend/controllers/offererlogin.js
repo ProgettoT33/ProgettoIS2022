@@ -1,6 +1,8 @@
 const Offerer = require("../models/offerer");
+const jwt = require('jsonwebtoken');
 
 const loginOfferer = (req, res, next) => {
+    
     let email = req.body.email;
     let password = req.body.password;
     console.log(email);
@@ -10,7 +12,21 @@ const loginOfferer = (req, res, next) => {
         if(!data){
             return res.json({message : "Wrong credentials"});
         }else{
-            return res.json({message : "OK"})
+            var payload = {
+                email: data.email,
+                id: data._id
+                // other data encrypted in the token	
+            }
+            var options = {
+                expiresIn: 86400 // expires in 24 hours
+            }
+            var token = jwt.sign(payload, process.env.SUPER_SECRET, options);
+        
+            return res.json({
+                message: 'OK',
+                token: token,
+                email: data.email
+            });
         }
     })
 };

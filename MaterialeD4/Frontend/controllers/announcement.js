@@ -1,11 +1,12 @@
 const Announcement = require("../models/announcement");
 const Student = require("../models/student");
-const getAllAnnouncement = (req, res, next) => {
-    Announcement.find({}, (err, data) => {
+
+const getAllAnnouncementByEmail = (req, res, next) => {
+    Announcement.find({offereremail : req.query.email}, (err, data) => {
         if(err) return res.json({Error : err});
         return res.json(data);
     })
-};
+}
 
 const newAnnouncement = (req, res, next) => {
     var hour1 = req.body.hour1;
@@ -75,35 +76,25 @@ const newAnnouncement = (req, res, next) => {
 };
 
 
-const deleteAllAnnouncement = (req, res, next) => {
-    Announcement.deleteMany({}, (err, data) => {
-        if(err) return res.json({message : "Complete delete failed"});
-        return res.json({message : "Complete delete successful"});
+const deleteAllAnnouncementByEmail = (req, res, next) => {
+    Announcement.deleteMany({offereremail : req.query.email}, (err, data) => {
+        if(err) return res.json({message : "NOT OK"});
+        return res.json({message : "OK"});
     })
 };
 
 
 const getOneAnnouncement = (req, res, next) => {
-    let typeofwork = req.params.typeofwork;
+    let typeofwork = req.query.typeofwork;
 
-    Announcement.findOne({typeofworn : typeofwork}, (err, data) => {
-        if(err || !data) return res.json({message : "Announcement doesn't exist"});
-        return res.json(data);
-    })
-};
-
-
-const deleteOneAnnouncement = (req, res, next) => {
-    let typeofwork = req.params.typeofwork;
-
-    Announcement.deleteOne({typeofwork : typeofwork}, (err, data) => {
+    Announcement.findOne({typeofwork : typeofwork}, (err, data) => {
         if(err || !data) return res.json({message : "Announcement doesn't exist"});
         return res.json(data);
     })
 };
 
 const printSetOfCandidates = (req, res, next) => {
-    let typeofwork = req.params.typeofwork;
+    let typeofwork = req.query.typeofwork;
 
     Announcement.findOne({typeofwork : typeofwork}, (err, data) => {
         if(err || !data) return res.json({message : "Announcement doesn't exist"});
@@ -112,7 +103,7 @@ const printSetOfCandidates = (req, res, next) => {
 }
 
 const addCandidate = (req, res, next) => {
-    let typeofwork = req.params.typeofwork;
+    let typeofwork = req.query.typeofwork;
 
     let email = req.query.email;
 
@@ -129,11 +120,10 @@ const addCandidate = (req, res, next) => {
 }
 
 module.exports = {
-    getAllAnnouncement,
+    getAllAnnouncementByEmail,
     newAnnouncement, 
-    deleteAllAnnouncement,
-    getOneAnnouncement, 
-    deleteOneAnnouncement,
+    deleteAllAnnouncementByEmail,
+    getOneAnnouncement,
     printSetOfCandidates,
     addCandidate
 };

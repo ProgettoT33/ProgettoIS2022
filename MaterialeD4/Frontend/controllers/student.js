@@ -1,7 +1,6 @@
 //GET '/student'
 const Student = require("../models/student");
 const Availability = require("../models/availability");
-const Service = require("../models/service");
 const Referencestudent = require("../models/referencestudent");
 const getAllStudent = (req, res, next) => {
     Student.find({}, (err, data) => {
@@ -49,7 +48,7 @@ const deleteAllStudent = (req, res, next) => {
 
 
 const getOneStudent = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Student.findOne({email : email}, (err, data) => {
         if(err || !data) return res.json({message : "Student doesn't exist"});
@@ -59,7 +58,7 @@ const getOneStudent = (req, res, next) => {
 
 
 const deleteOneStudent = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Student.deleteOne({email : email}, (err, data) => {
         if(err || !data) return res.json({message : "Student doesn't exist"});
@@ -69,7 +68,7 @@ const deleteOneStudent = (req, res, next) => {
 
 
 const incrementCountDoneServices = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Student.findOneAndUpdate({email : email}, {$inc: {countdoneservices : 1}}, {new: true},function(err, response) {
     if (err) {
@@ -80,7 +79,7 @@ const incrementCountDoneServices = (req, res, next) => {
 }
 
 const incrementCountDeclinedServices = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Student.findOneAndUpdate({email : email}, {$inc: {countdeclinedservices : 1}}, {new: true},function(err, response) {
     if (err) {
@@ -91,7 +90,7 @@ const incrementCountDeclinedServices = (req, res, next) => {
 }
 
 const incrementCountDeclinedServices24h = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Student.findOneAndUpdate({email : email}, {$inc: {countdeclinedservicesbefore24h : 1}}, {new: true},function(err, response) {
     if (err) {
@@ -101,17 +100,8 @@ const incrementCountDeclinedServices24h = (req, res, next) => {
     }});
 }
 
-/*const printCronologyOfServices = (req, res, next) => {
-    let email = req.params.email;
-
-    Service.find({studentemail : email}, (err, data) => {
-        if(err) return res.json({Message : err});
-        return res.json(data);
-    })
-}*/
-
 const printReferences = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Referencestudent.find({studentemail : email}, (err, data) => {
         if(err) return res.json({Error : err});
@@ -120,7 +110,7 @@ const printReferences = (req, res, next) => {
 }
 
 const printAvailabilities = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Availability.find({studentemail : email}, (err, data) => {
         if(err) return res.json({Error : err});
@@ -130,7 +120,7 @@ const printAvailabilities = (req, res, next) => {
 //da controllare questa
 /*
 const calculateAverageOfVotes = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     var sum = 0;
     var count = 0;
@@ -144,7 +134,7 @@ const calculateAverageOfVotes = (req, res, next) => {
         console.log("Ciaooutfor");
     })
 
-    let email2 = req.params.email;
+    let email2 = req.query.email;
     var result = sum / count;
     Student.findOneAndUpdate({email : email2}, {averagevotes : result}, {upsert : true}, function(err, response) {
         if (err) {
@@ -155,7 +145,7 @@ const calculateAverageOfVotes = (req, res, next) => {
 }*/
 
 const setIdTelegram = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Student.findOneAndUpdate({email : email}, {idtelegram : req.query.id}, {new: true}, function(err, response) {
     if (err) {
@@ -166,7 +156,7 @@ const setIdTelegram = (req, res, next) => {
 }
 
 const setDescription = (req, res, next) => {
-    let email = req.params.email;
+    let email = req.query.email;
 
     Student.findOneAndUpdate({email : email}, {description : req.query.description}, {new: true}, function(err, response) {
     if (err) {

@@ -4,12 +4,12 @@ const offererSchema = new mongoose.Schema({
     name : {type : String, required : true},
     surname : {type : String, required : true},
     email : {type : String, required : true},
-    idtelegram : String, 
+    idtelegram : {type : String, default : ""}, 
     confirmedaccount : {type : Boolean, default : false},
     password : {type : String, required : true},
     relatedStudentsEmail : [String],
     averagevotes : {type : Number, default : 0},
-    description : String
+    description : {type : String, default : ""}
 });
 
 const Offerer = mongoose.model('Offerer', offererSchema);

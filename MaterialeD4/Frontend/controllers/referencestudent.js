@@ -38,7 +38,7 @@ const deleteAllReferenceStudent = (req, res, next) => {
 
 const getOneReferenceStudent = (req, res, next) => {
     let emailO = req.query.emailO;
-    let emailS = req.params.emailS;
+    let emailS = req.query.emailS;
 
     Referencestudent.findOne({studentemail : emailS, offereremail : emailO}, (err, data) => {
         if(err || !data) return res.json({message : "Reference doesn't exist"});
@@ -49,7 +49,7 @@ const getOneReferenceStudent = (req, res, next) => {
 
 const deleteOneReferenceStudent = (req, res, next) => {
     let emailO = req.query.emailO;
-    let emailS = req.params.emailS;
+    let emailS = req.query.emailS;
 
     Referencestudent.deleteOne({offereremail : emailO, studentemail : emailS}, (err, data) => {
         if(err || !data) return res.json({message : "Student doesn't exist"});
