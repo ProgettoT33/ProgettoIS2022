@@ -36,6 +36,7 @@ const newOfferer = (req, res, next) => {
             const newOfferer = new Offerer({
                 name : name,
                 surname : surname,
+                confirmedaccount : "true",
                 email : email,
                 idtelegram : idtelegram, 
                 description : description,

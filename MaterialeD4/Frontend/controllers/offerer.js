@@ -7,7 +7,7 @@ const deleteOneOfferer = (req, res, next) => {
     })
 
     Offerer.deleteOne({email : email}, (err, data) => {
-        if(err || !data) return res.status(404).json("NOT OK");
+        if(data.deletedCount === 0) return res.status(404).json({message : "NOT OK"});
         return res.status(200).json({message : "OK"});
     })
     
@@ -26,7 +26,7 @@ const setIdTelegram = (req, res, next) => {
     let email = req.query.email;
 
     Offerer.findOneAndUpdate({email : email}, {idtelegram : req.body.idtelegram}, {new: true}, function(err, response) {
-    if (err) {
+    if (err || !response) {
         return res.status(404).json({message : "NOT OK"});
     } else {
         return res.status(200).json({message : "OK"});
@@ -37,7 +37,7 @@ const setDescription = (req, res, next) => {
     let email = req.query.email;
 
     Offerer.findOneAndUpdate({email : email}, {description : req.body.description}, {new: true}, function(err, response) {
-    if (err) {
+    if (err || !response) {
         return res.status(404).json({message : "NOT OK"});
     } else {
         return res.status(200).json({message : "OK"});
@@ -48,7 +48,7 @@ const setName = (req, res, next) => {
     let email = req.query.email;
 
     Offerer.findOneAndUpdate({email : email}, {name : req.body.name}, {new: true}, function(err, response) {
-    if (err) {
+    if (err || !response) {
         return res.status(404).json({message : "NOT OK"});
     } else {
         return res.status(200).json({message : "OK"});
@@ -59,7 +59,7 @@ const setSurname = (req, res, next) => {
     let email = req.query.email;
 
     Offerer.findOneAndUpdate({email : email}, {surname : req.body.surname}, {new: true}, function(err, response) {
-    if (err) {
+    if (err || !response) {
         return res.status(404).json({message : "NOT OK"});
     } else {
         return res.status(200).json({message : "OK"});
@@ -71,19 +71,15 @@ const setPassword = (req, res, next) => {
     let newPassword = req.body.new;
     let newPasswordConfirm = req.body.newnew;
 
-    Offerer.findOne({email : email}, (err, data) => {
-        if(!data) return res.status(404).json({message : "Offerer doesn't exist"});
-    })
-
-    if(newPassword != newPasswordConfirm){
-        return res.status(400).json({message : "Two new password are not equal"});
+    if(newPassword !== newPasswordConfirm){
+        return res.json({message : "Two new password are not equal"});
     }
 
     Offerer.findOneAndUpdate({email : email},{password : newPassword}, {new: true}, function(err, response) {
-        if (err) {
-            return res.status(404).json({message : "NOT OK"});
+        if (err || !response) {
+            return res.json({message : "NOT OK"});
         } else {
-            return res.status(200).json({message : "OK"});
+            return res.json({message : "OK"});
         }});
 }
 
