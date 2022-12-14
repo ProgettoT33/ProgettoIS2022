@@ -46,7 +46,7 @@
                 "summary" : "Get one offerer by email",
                 "parameters": [
                 {
-                        "name": "parameterstosent",
+                        "name": "email",
                         "in": "query",
                         "description": "Parameters to be sent",
                         "required": true,
