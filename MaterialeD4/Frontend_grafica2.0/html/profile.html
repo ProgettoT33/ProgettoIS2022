@@ -11,27 +11,9 @@
         li{
             font-size: 18px !important;
         }
-
-        #btn6{
-            background-color: #6a6a6a0a;
-            border-left-style: solid;
-            border-color: #21C9D3;
-        } 
-
-        #email:hover {
-            cursor: not-allowed;
-        }
-
-        .bottoniGestioneNuovoAnnuncio{
-            margin-top: 50px !important;
-        }
-
-        h1{
-            margin-bottom: 40px !important;
-        }
     </style>
-    <link rel="stylesheet" href="./styleSite.css" type="text/css">
 
+    <link rel="stylesheet" href="./styleSite.css" type="text/css">
 </head>
 <body onload="showProfile()">
 
@@ -57,23 +39,18 @@
           <button id="btn8" class="leftMenu">Cancella profilo</button>
 
           <p>Dati di accesso</p>
+          
           <button id="btn10" class="leftMenu">Modifica password</button>
           <button id="btn9" class="leftMenu">Logout</button>
         </div>
     
         <div class="card">
-            <div>
-                <h1 class="titolo">Profilo personale - Modifica dati personali</h1>
-                <ul></ul>
-                <div class="bottoniGestioneNuovoAnnuncio">
-                    <button type="submit" id="btn11" class="button greyButton">Annulla</button>
-                    <button type="submit" id="btn12" class="button blueButton">Salva</button>
-                </div>
-            </div>
+          <h1 class="titolo">Profilo personale</h1>
+          <ul></ul>
         </div> 
     
     </div>
-
+    
     <script></script>
 </body>
 <script>
@@ -91,38 +68,81 @@
         const markup = `
 
         <div class="profiloPersonale">
-
-            <div id="jpg-div">
-                <img id="jpg" src="profilePic.png" width="150" height="150" alt="" />
-                <img id="gif" src="modifyIcon.png" width="33" height="33" alt="" onclick="funzNonImplementata();" />
-            </div>
-            
-            <div class="datiModifica">
+            <img src="profilePic.png" width="150" height="150">
+            <div class="dati">
                 <li>Nome:</li>
                 <li>Cognome:</li>
                 <li>Email:</li>
                 <li>ID Telegram:</li>
+            </div>
+            <div class="daDatabase">
+                <li> ${data.name}</li>
+                <li> ${data.surname}</li>
+                <li> ${data.email}</li>
+                <li> ${data.idtelegram}</li>
+            </div>
+        </div>
+        <div class="profiloPersonale" id="layoutDescrizione">
+            <div class="dati">
                 <li>Descrizione:</li>
             </div>
             <div class="daDatabase">
-                <form id="form" class="layoutFormModificaDati">
-                    <input type="text" name="name" id="name" placeholder="Inserisci il nome" value="${data.name}"><br>
-                    <input type="text" name="surname" id="surname" placeholder="Inserisci il cognome" value="${data.surname}"><br>
-                    <input type="text" name="email" id="email" value="${data.email}" disabled><br>
-                    <input type="text" name="idtelegram" id="idtelegram" placeholder="Inserisci ID Telegram" value="${data.idtelegram}"><br>
-                    <textarea id="description" name="description" placeholder="Inserisci descrizione del lavoro" cols="40" rows="5" value="${data.description}"></textarea>
-                </form>
+                <li> ${data.description}</li>
             </div>
         </div>
-        
-        `
+
+        <div class="statisticheERecensioni">
+            <div class="statistiche">
+                <h3>Statistiche profilo e valutazione</h3>
+                <div class="layoutStatistiche">
+                    <div>
+                        <li>Valutazione:</li>
+                        <br>
+                        <li>Annunci completati:</li>
+                        <li>Annunci annullati:</li>
+            
+                    </div>
+
+                    <div>
+                        <div class="stelle">
+                            <img src="star.png" height="27" width="27" />
+                            <img src="star.png" height="27" width="27" />
+                            <img src="star.png" height="27" width="27" />
+                            <img src="star.png" height="27" width="27" />
+                            <img src="star.png" height="27" width="27" />
+                            <li id="mediaVoti"> ${data.averagevotes}</li>
+                        </div>
+                        <div class="datiStatisticheAnnunci">
+                            
+                            <li style="color: #5CD546; font-weight: bold;">
+                                0
+                                <!-- aggiungere numero annunci completati -->
+                            </li>
+                            <li style="color: #FF0000; font-weight: bold;">
+                                0
+                                <!-- aggiungere numero annunci annullati -->    
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="separatore">
+                <br>    
+            </div>
+            <div class="feedback">
+                <h3>Feedback e recensioni</h3>
+                <p>Nessuna recensione disponibile al momento</p>    
+            </div>
+        </div>
+
+
+         `
 
         document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
         })
-    }
-
-    function funzNonImplementata(){
-        alert("Funzionalità non ancora implementata.");
     }
 
     btn1.addEventListener('click', function(e){
@@ -137,17 +157,17 @@
       location.replace("http://localhost:8080/create?token="+access_token+"&email="+email)
     })
 
-    btn3.addEventListener('click', function(e){
-      e.preventDefault();
-
-      location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email)
-    })
-
     btn5.addEventListener('click', function(e){
       alert("Funzione non ancora implementata");
     });
 
-    
+    btn6.addEventListener('click', function(e){
+      e.preventDefault();
+
+      //aggiungere collegamento con profileModify.html
+      //location.replace()
+    })
+
     btn7.addEventListener('click', function(e){
       e.preventDefault();
 
@@ -193,292 +213,5 @@
       location.replace("http://localhost:8080")
     })
 
-    btn11.addEventListener('click', function(e){
-      e.preventDefault();
-
-      location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email)
-    })
-
-    btn12.addEventListener('click', function(e){
-
-        const prePayload = new FormData(form);
-        const payload = new URLSearchParams(prePayload);
-        console.log([...payload]);
-
-        const alert = new Boolean(false);
-
-        //nome
-        fetch('http://localhost:8080/api/offerer/name?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message != "NOT OK" && data.message != "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti nel campo 'nome'");
-                    alert=true;
-                }
-                if(data.message === "NOT OK"){
-                alert("Attenzione, modifiche del campo 'nome' non effettuate correttamente");
-                alert=true;
-                }
-            })
-            
-        })
-
-        //cognome
-        fetch('http://localhost:8080/api/offerer/surname?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message != "NOT OK" && data.message != "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti nel campo 'cognome'");
-                    alert=true;
-                }
-                if(data.message === "NOT OK"){
-                alert("Attenzione, modifiche del campo 'cognome' non effettuate correttamente");
-                alert=true;
-                }
-            })
-        })
-
-        //idTelegram
-        fetch('http://localhost:8080/api/offerer/idtelegram?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message != "NOT OK" && data.message != "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti nel campo 'ID Telegram'");
-                    alert=true;
-                }
-                if(data.message === "NOT OK"){
-                    alert("Attenzione, modifiche del campo 'ID Telegram' non effettuate correttamente");
-                    alert=true;
-                }
-            })
-            
-        })
-        
-        //descrizione
-        fetch('http://localhost:8080/api/offerer/description?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message !== "NOT OK" && data.message !== "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti nel campo 'descrizione'");
-                    alert=true;
-                }
-                if(data.message === "NOT OK"){
-                    alert("Attenzione, modifiche del campo 'descrizione' non effettuate correttamente");
-                    alert=true;
-                }
-            })
-        })
-
-        if(!alert){
-            alert("funzionato tutto a meraviglia");
-            location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email)
-        }
-    })
-
-
-    
-/*
-    btn2.addEventListener('click', function(e){
-        e.preventDefault();
-
-        fetch('http://localhost:8080/api/offerer/email?email='+email, {
-            method : "DELETE"
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message === "NOT OK"){
-                alert("Non puoi cancellare il tuo account, hai degli annunci ancora attivi");
-                }else{
-                    alert("Account cancellato correttamente");
-                    location.replace('http://localhost:8080/');
-                }
-            })
-            
-        })
-    })
-
-    
-
-    btn3.addEventListener('click', function(e){
-      e.preventDefault();
-
-      fetch('http://localhost:8080/api/announcement?email='+email, {
-            method : "DELETE"
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message === "NOT OK"){
-                alert("Attenzione, annunci non cancellati");
-                }else{
-                    alert("Annunci cancellati correttamente");
-                }
-            })
-            
-        })
-    })
-
-    btn4.addEventListener('click', function(e){
-        e.preventDefault();
-  
-        const prePayload = new FormData(form);
-        const payload = new URLSearchParams(prePayload);
-        console.log([...payload]);
-
-
-      fetch('http://localhost:8080/api/offerer/idtelegram?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message != "NOT OK" && data.message != "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti");
-                }
-                if(data.message === "NOT OK"){
-                alert("Attenzione, modifiche non effettuate correttamente");
-                }else{
-                    alert("Modifiche effettuate correttamente");
-                    location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email);
-                }
-            })
-            
-        })
-    })
-
-    btn5.addEventListener('click', function(e){
-        e.preventDefault();
-  
-        const prePayload = new FormData(form);
-        const payload = new URLSearchParams(prePayload);
-        console.log([...payload]);
-
-
-      fetch('http://localhost:8080/api/offerer/description?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message !== "NOT OK" && data.message !== "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti");
-                }
-                if(data.message === "NOT OK"){
-                alert("Attenzione, modifiche non effettuate correttamente");
-                }else{
-                    alert("Modifiche effettuate correttamente");
-                    location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email);
-                }
-            })
-            
-        })
-    })
-
-    btn6.addEventListener('click', function(e){
-        e.preventDefault();
-  
-        const prePayload = new FormData(form);
-        const payload = new URLSearchParams(prePayload);
-        console.log([...payload]);
-
-
-      fetch('http://localhost:8080/api/offerer/name?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message != "NOT OK" && data.message != "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti");
-                }
-                if(data.message === "NOT OK"){
-                alert("Attenzione, modifiche non effettuate correttamente");
-                }else{
-                    alert("Modifiche effettuate correttamente");
-                    location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email);
-                }
-            })
-            
-        })
-    })
-
-    btn7.addEventListener('click', function(e){
-        e.preventDefault();
-  
-        const prePayload = new FormData(form);
-        const payload = new URLSearchParams(prePayload);
-        console.log([...payload]);
-
-
-      fetch('http://localhost:8080/api/offerer/surname?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message != "NOT OK" && data.message != "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti");
-                }
-                if(data.message === "NOT OK"){
-                alert("Attenzione, modifiche non effettuate correttamente");
-                }else{
-                    alert("Modifiche effettuate correttamente");
-                    location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email);
-                }
-            })
-            
-        })
-    })
-
-    btn8.addEventListener('click', function(e){
-        e.preventDefault();
-  
-        const prePayload = new FormData(form);
-        const payload = new URLSearchParams(prePayload);
-        console.log([...payload]);
-
-
-      fetch('http://localhost:8080/api/offerer/password?email='+email, {
-            method : "POST",
-            body : payload
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message != "NOT OK" && data.message != "OK"){
-                    alert("Attenzione, ricontrolla i valori inseriti");
-                }
-                if(data.message === "NOT OK"){
-                alert("Attenzione, modifiche non effettuate correttamente");
-                }else{
-                    alert("Modifiche effettuate correttamente");
-                    location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email);
-                }
-            })
-            
-        })
-    })
-    */
 </script>
 </html>
