@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <title>Stay Busy</title>
+
+    <style>
+      #btn1{
+        background-color: #6a6a6a0a;
+        border-left-style: solid;
+        border-color: #21C9D3;
+      } 
+    </style>
+
+    <link rel="stylesheet" href="./styleSite.css" type="text/css">
+</head>
+<body onload="showAnnouncement()">
+
+  <div class="boxTop">
+    <div class="boxTopLeft">
+      <button id="btn4" class="topButton"><img src="StayBusy.png" width="50" height="50"></button>
+    </div>
+    <div class="boxTopRight">
+      <button id="btn5" class="topButton"><img src="cronology.png" width="38" height="38"></button>
+      <button id="btn3" class="topButton"><img src="profile.png" width="38" height="38"></button>
+    </div>
+    
+  </div>
+
+  <div class="boxBottom">
+
+    <div class="boxLeft">
+      <button id="btn1" disabled class="leftMenu">Annunci di lavoro attivi</button>
+      <button id="btn2" class="leftMenu">Crea nuovo annuncio</button>
+    </div>
+
+    <div class="card">
+      <h1 class="titolo">Annunci di lavoro attivi</h1>
+      
+      <ul></ul>
+    </div> 
+
+  </div>
+
+  <script>
+
+    var url = window.location;
+
+    var access_token = new URLSearchParams(url.search).get('token');
+    var email = new URLSearchParams(url.search).get('email');
+
+    function funzNonImplementata(){
+        alert("Funzionalità non ancora implementata.");
+    }
+
+    btn1.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("http://localhost:8080/homepage?token="+access_token+"&email="+email)
+    })
+
+    btn2.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("http://localhost:8080/create?token="+access_token+"&email="+email)
+    })
+
+    btn3.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email)
+    })
+
+    const showAnnouncement = () => {
+    fetch('http://localhost:8080/api/announcement/email?email='+email)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      data.forEach(announcement => {
+        const markup = `
+        
+        <div class="annuncio" onclick="funzNonImplementata();">
+          <div class="data">
+            <img src="profilePic.png" width="88" height="88">
+
+            <div class="workDescription">
+              <p id="typeOfWork">${announcement.typeofwork}</p>
+              <!-- da inserire nome e cognome offerente -->
+              
+            
+              <li><span>Data:</span> ${announcement.date.day}/${announcement.date.month}/${announcement.date.year}</li>
+              <li><span>Orario:</span> ${announcement.starttime.hour}:${announcement.starttime.minutes}-${announcement.endttime.hour}:${announcement.endttime.minutes}</li>
+              <li><span>Tipo di pagamento:</span> ${announcement.typeofpayment}</li>
+              <li><span>Descrizione:</span> ${announcement.description}</li>
+              
+            </div>
+          </div>
+
+          <div class="datiCalcolatiAnnuncio">
+            <p>Persone che hanno visualizzato l'annuncio: <span>
+              <!-- aggiungere numero persone -->
+            </span></p>
+            <p>Richieste di effettuare il lavoro: <span>
+              <!-- aggiungere numero richieste -->  
+            </span></p>
+            <p>Stato: <span>
+              <!-- aggiungere stato -->
+            </span></p>
+          </div>
+
+        </div>`
+
+        document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+      });
+    })
+    .catch(error => console.log(error));
+    }
+
+    btn5.addEventListener('click', function(e){
+      alert("Funzione non ancora implementata");
+    });
+
+  </script>
+
+  
+
+</body>
+</html>
