@@ -19,12 +19,15 @@
       h1{
         text-align: center !important;
         margin-left: 0px !important;
-        margin-bottom: 40px !important;
       }
 
       .card{
         display: flex; 
         justify-content: center;
+      }
+
+      ul{
+        padding: 0px !important;
       }
     </style>
     <link rel="stylesheet" href="./styleSite.css" type="text/css">
@@ -33,7 +36,6 @@
 <body>
 
   <div class="boxTop">
-    <!-- inserire alert per cronologia lavorativa -->
     <div class="boxTopLeft">
       <button id="btn4" class="topButton"><img src="StayBusy.png" width="50" height="50"></button>
     </div>
@@ -52,9 +54,9 @@
     </div>
 
     <div class="card">
-      
       <div class="inserimentoDati">
-        <h1 class="titolo">Crea un nuovo annuncio</h1>     
+        <h1 class="titolo">Crea un nuovo annuncio</h1> 
+        <ul>    
         <form id="form">
             <div class="datiFormLayout">
               <h2>Tipo di lavoro</h2>
@@ -91,7 +93,9 @@
             </div>
           
         </form>
+        </ul>
       </div>
+      
     </div> 
 
   </div>

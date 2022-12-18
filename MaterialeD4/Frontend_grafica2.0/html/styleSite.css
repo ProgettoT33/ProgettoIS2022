@@ -36,6 +36,8 @@ body {
     margin-top: 30px;
 
     max-width: 100vw;
+    max-height: 85vh;
+    min-height: 85vh;
 }
 
 .boxLeft{
@@ -52,8 +54,8 @@ body {
     box-shadow: 3px 3px 3px #00000030;
 
     width: 65%;
-    max-height: 85vh;
     min-width: 615px !important;
+    min-height: 75% !important;
 }
 
 .topButton{
@@ -113,6 +115,9 @@ h1 {
 ul {
     list-style-type: none;
     padding-right: 40px;
+
+    max-height: 85%;
+	overflow-y: auto;
 }
 
 .data span {
@@ -208,7 +213,7 @@ h3{
     background: white;
     padding: 7px 5px;
     
-    min-width: 37vw;
+    min-width: 373.78px;
     min-height: 200px;
 
     border-top: 1px solid #6a6a6a56;
@@ -229,6 +234,7 @@ h3{
     max-width: 471px;
     margin: auto;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .button{
@@ -340,6 +346,8 @@ textarea {
 .statisticheERecensioni{
     display: flex;
     justify-content: space-between;
+
+    min-height: 30vh;
 }
 
 .statistiche{
@@ -353,7 +361,7 @@ textarea {
 }
 
 .separatore{
-    min-height: 40vh;
+    min-height: 10%;
 
     margin-top: 40px;
 
