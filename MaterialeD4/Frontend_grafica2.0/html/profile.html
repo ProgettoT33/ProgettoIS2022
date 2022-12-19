@@ -46,7 +46,9 @@
     
         <div class="card">
           <h1 class="titolo">Profilo personale</h1>
-          <ul></ul>
+          <div class="scrollbar" id="style-1">
+            <ul></ul>
+          </div>
         </div> 
     
     </div>
@@ -100,7 +102,6 @@
                         <br>
                         <li>Annunci completati:</li>
                         <li>Annunci annullati:</li>
-            
                     </div>
 
                     <div>
@@ -133,8 +134,12 @@
                 <br>    
             </div>
             <div class="feedback">
+                
                 <h3>Feedback e recensioni</h3>
-                <p>Nessuna recensione disponibile al momento</p>    
+                <div class="scrollbar" id="style-1">
+                    <p>Nessuna recensione disponibile al momento</p> 
+                </div>
+                   
             </div>
         </div>
 
@@ -192,7 +197,7 @@
                 if(data.message === "NOT OK"){
                 alert("Attenzione, annunci non cancellati");
                 }else{
-                    alert("Annunci cancellati correttamente");
+                    location.replace("http://localhost:8080/homepage?token=" + access_token+"&email="+email)
                 }
             })
             
@@ -215,7 +220,6 @@
                     if(data.message === "NOT OK"){
                     alert("Non puoi cancellare il tuo account, hai degli annunci ancora attivi");
                     }else{
-                        alert("Account cancellato correttamente");
                         location.replace('../');
                     }
                 })

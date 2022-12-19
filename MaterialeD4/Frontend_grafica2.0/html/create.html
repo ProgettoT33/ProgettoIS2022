@@ -26,9 +26,7 @@
         justify-content: center;
       }
 
-      ul{
-        padding: 0px !important;
-      }
+      
     </style>
     <link rel="stylesheet" href="./styleSite.css" type="text/css">
 
@@ -56,7 +54,7 @@
     <div class="card">
       <div class="inserimentoDati">
         <h1 class="titolo">Crea un nuovo annuncio</h1> 
-        <ul>    
+        <div class="scrollbar" id="style-1">    
         <form id="form">
           <div class="datiFormLayout">
             <h2>Tipo di lavoro</h2>
@@ -85,7 +83,7 @@
               <option value="paypal">Paypal</option>
             </select><br>
             <h2>Descrizione del lavoro</h2>
-            <textarea id="description" name="description" placeholder="Inserisci descrizione del lavoro" cols="40" rows="5"></textarea>
+            <textarea id="description" name="description" placeholder="Inserisci descrizione del lavoro" cols="30" rows="5"></textarea>
           </div>
           <div class="bottoniGestioneNuovoAnnuncio">
             <button type="submit" id="btn6" class="button greyButton">Annulla</button>
@@ -93,7 +91,7 @@
           </div>
           
         </form>
-        </ul>
+      </div>
       </div>
       
     </div> 

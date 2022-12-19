@@ -22,12 +22,12 @@
             cursor: not-allowed;
         }
 
-        .bottoniGestioneNuovoAnnuncio{
-            margin-top: 50px !important;
-        }
-
         h1{
             margin-bottom: 40px !important;
+        }
+
+        #description{
+            min-width: 37vw !important;
         }
     </style>
     <link rel="stylesheet" href="./styleSite.css" type="text/css">
@@ -62,16 +62,17 @@
         </div>
     
         <div class="card">
-            <div>
-                <h1 class="titolo">Profilo personale - Modifica dati personali</h1>
+            <h1 class="titolo">Profilo personale - Modifica dati personali</h1>
+            <div class="scrollbar" id="style-1">
+                    
                 <ul></ul>
                 <div class="bottoniGestioneNuovoAnnuncio">
                     <button type="submit" id="btn11" class="button greyButton">Annulla</button>
                     <button type="submit" id="btn12" class="button blueButton">Salva</button>
                 </div>
+                    
             </div>
-        </div> 
-    
+        </div>    
     </div>
 
     <script></script>
@@ -110,7 +111,7 @@
                     <input type="text" name="surname" id="surname" placeholder="Inserisci il cognome" value="${data.surname}"><br>
                     <input type="text" name="email" id="email" value="${data.email}" disabled><br>
                     <input type="text" name="idtelegram" id="idtelegram" placeholder="Inserisci ID Telegram" value="${data.idtelegram}"><br>
-                    <textarea id="description" name="description" placeholder="Inserisci descrizione del lavoro" cols="40" rows="5" value="${data.description}"></textarea>
+                    <textarea id="description" name="description" placeholder="Inserisci descrizione del lavoro" cols="40" rows="5">${data.description}</textarea>
                 </form>
             </div>
         </div>
@@ -172,7 +173,7 @@
                 if(data.message === "NOT OK"){
                 alert("Attenzione, annunci non cancellati");
                 }else{
-                    alert("Annunci cancellati correttamente");
+                    location.replace("http://localhost:8080/homepage?token=" + access_token+"&email="+email)
                 }
             })
             
@@ -194,7 +195,6 @@
                     if(data.message === "NOT OK"){
                     alert("Non puoi cancellare il tuo account, hai degli annunci ancora attivi");
                     }else{
-                        alert("Account cancellato correttamente");
                         location.replace('../');
                     }
                 })
@@ -303,7 +303,6 @@
             })
         })
 
-        alert("Modifiche effettuate!");
         location.replace("../profile?token="+access_token+"&email="+email)
     })
 </script>

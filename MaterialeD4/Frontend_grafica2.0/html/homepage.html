@@ -18,6 +18,15 @@
         min-height: 85% !important;
         max-height: 85% !important;
       }
+
+      .boxBottom{
+        min-height: 85vh !important;
+      }
+
+      .force-overflow{
+        min-width: 97%;
+        max-width: 97%;
+      }
     </style>
 
     <link rel="stylesheet" href="./styleSite.css" type="text/css">
@@ -44,8 +53,9 @@
 
     <div class="card">
       <h1 class="titolo">Annunci di lavoro attivi</h1>
-      
-      <ul></ul>
+      <div class="scrollbar" id="style-1">
+        <ul></ul>
+      </div>
     </div> 
 
   </div>
@@ -136,7 +146,7 @@
                 ${announcement.candidates.length}
               </span></p>
               <p>Stato: <span>
-                In attesa (non implementato)
+                Non ancora assegnato (non implementato)
               </span></p>
             </div>
 
