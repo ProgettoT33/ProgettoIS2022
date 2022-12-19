@@ -33,6 +33,22 @@ app.get('/login', function(req, res) {
     res.sendFile(path.join(__dirname, '/html/login.html'));
 });
 
+app.get('/loginStudente', function(req, res){
+    res.sendFile(path.join(__dirname, '/html/loginStudente.html'));
+})
+
+app.get('/registrationStudente', function(req, res){
+    res.sendFile(path.join(__dirname, '/html/registrationStudente.html'));
+})
+
+app.get('/modify', function(req, res){
+    res.sendFile(path.join(__dirname, '/html/profileModify.html'));
+})
+
+app.get('/modifypsw', function(req, res){
+    res.sendFile(path.join(__dirname, '/html/modificaPassword.html'));
+})
+
 app.get('/homepage', function(req, res) {
     res.sendFile(path.join(__dirname, '/html/homepage.html'));
 });

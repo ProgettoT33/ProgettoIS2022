@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/html/favicon.ico">
+    <title>Stay Busy</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" placeholder="Inserisci il tipo di lavoro" id="typeofwork" name="typeofwork"><br>
+        <input type="text" placeholder="Inserisci il luogo" id="city" name="city"><br>
+        <input type="number" name="day" id="day" placeholder="Inserisci giorno">
+        <input type="number" name="month" id="month" placeholder="Inserisci mese">
+        <input type="number" name="year" id="year" placeholder="Inserisci anno"><br>
+        <input type="number" name="hour1" id="hour1" placeholder="Inserisci ora inizio">
+        <input type="number" name="minutes1" id="minutes1" placeholder="Inserisci minuti inizio"><br>
+        <input type="number" name="hour2" id="hour2" placeholder="Inserisci ora fine">
+        <input type="number" name="minutes2" id="minutes2" placeholder="Inserisci minuti fine"><br>
+        Tipo di pagamento
+        <select name="typeofpayment" id="typeofpayment" name="typeofpayment">
+            <option value="contanti" selected="selected">Contanti</option>
+            <option value="paypal">Paypal</option>
+        </select><br>
+        <input type="text" placeholder="Inserisci descrizione del lavoro" id="description" name="description"><br>
+        <button type="submit" id="btn1">Annulla</button>
+        <button type="submit" id="btn2">Crea annuncio</button>
+    </form>
+    <script>
+
+    var url = window.location;
+
+    var access_token = new URLSearchParams(url.search).get('token');
+    var email = new URLSearchParams(url.search).get('email');
+
+
+    btn2.addEventListener('click', function(e){
+        e.preventDefault();
+  
+        const prePayload = new FormData(form);
+        const payload = new URLSearchParams(prePayload);
+        payload.append('offereremail', email);
+        console.log([...payload]);
+
+        fetch('../api/announcement',{
+            method : "POST",
+            body : payload
+            })
+            .then(res => {
+              return res.json().then(data => {
+                console.log(data);
+                if(data.message === 'OK'){
+                  alert("Annuncio creato!");
+                  location.replace("../homepage?token=" + access_token+"&email="+email)
+                }else{
+                  alert("Attenzione, credenziali errate");
+                }
+              })
+            })
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
+        
+      })
+
+        btn1.addEventListener('click', function(e){
+        e.preventDefault();
+
+        location.replace("../homepage?token=" + access_token+"&email="+email)
+        });        
+    </script>
+</body>
+</html>

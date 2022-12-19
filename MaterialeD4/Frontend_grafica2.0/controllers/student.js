@@ -1,4 +1,3 @@
-//GET '/student'
 const Student = require("../models/student");
 const Availability = require("../models/availability");
 const Referencestudent = require("../models/referencestudent");
@@ -117,32 +116,6 @@ const printAvailabilities = (req, res, next) => {
         return res.json(data);
     })
 }
-//da controllare questa
-/*
-const calculateAverageOfVotes = (req, res, next) => {
-    let email = req.query.email;
-
-    var sum = 0;
-    var count = 0;
-
-    Referencestudent.find({studentemail : email}, (err, data) => {
-        for(var i = 0; i < data.lenght; i++){
-            sum = sum + data[i].vote;
-            console.log("Ciaofor");
-            count = count + 1;
-        }
-        console.log("Ciaooutfor");
-    })
-
-    let email2 = req.query.email;
-    var result = sum / count;
-    Student.findOneAndUpdate({email : email2}, {averagevotes : result}, {upsert : true}, function(err, response) {
-        if (err) {
-            return res.json({message : "Student doesn't exist"});
-        } else {
-            return res.json(response);
-        }});
-}*/
 
 const setIdTelegram = (req, res, next) => {
     let email = req.query.email;
@@ -166,8 +139,6 @@ const setDescription = (req, res, next) => {
     }});
 }
 
-
-//export controller functions
 module.exports = {
     getAllStudent,
     newStudent, 

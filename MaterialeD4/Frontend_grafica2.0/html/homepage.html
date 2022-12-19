@@ -61,69 +61,117 @@
         alert("Funzionalità non ancora implementata.");
     }
 
-    btn1.addEventListener('click', function(e){
-      e.preventDefault();
-
-      location.replace("http://localhost:8080/homepage?token="+access_token+"&email="+email)
-    })
-
-    btn2.addEventListener('click', function(e){
-      e.preventDefault();
-
-      location.replace("http://localhost:8080/create?token="+access_token+"&email="+email)
-    })
-
-    btn3.addEventListener('click', function(e){
-      e.preventDefault();
-
-      location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email)
-    })
-
     const showAnnouncement = () => {
-    fetch('http://localhost:8080/api/announcement/email?email='+email)
+    fetch('../api/announcement/email?email='+email)
     .then(res => {
       return res.json();
     })
     .then(data => {
       data.forEach(announcement => {
-        const markup = `
+        fetch('../api/offerer/emailO?email='+announcement.offereremail)
+        .then(res=>{
+          return res.json();
+        })
+        .then(data2 => {
+          let day = "";
+          let month = "";
+          let hour1 = "";
+          let hour2 = "";
+          let minutes1 = "";
+          let minutes2 = "";
+          if(announcement.date.day <= 9){
+            day = '0' + String(announcement.date.day);
+          }else{
+            day = String(announcement.date.day);
+          }
+          if(announcement.date.month <= 9){
+            month = '0' + String(announcement.date.month);
+          }else{
+            month = String(announcement.date.month);
+          }
+          if(announcement.starttime.hour <= 9){
+            hour1 = '0' + String(announcement.starttime.hour);
+          }else{
+            hour1 = String(announcement.starttime.hour);
+          }
+          if(announcement.endttime.hour <= 9){
+            hour2 = '0' + String(announcement.endtime.hour);
+          }else{
+            hour2 = String(announcement.endttime.hour);
+          }
+          if(announcement.starttime.minutes <= 9){
+            minutes1 = '0' + String(announcement.starttime.minutes);
+          }else{
+            minutes1 = String(announcement.starttime.minutes);
+          }
+          if(announcement.endttime.minutes <= 9){
+            minutes2 = '0' + String(announcement.endttime.minutes);
+          }else{
+            minutes2 = String(announcement.endttime.minutes);
+          }
+          const markup = `
         
-        <div class="annuncio" onclick="funzNonImplementata();">
-          <div class="data">
-            <img src="profilePic.png" width="88" height="88">
+          <div class="annuncio" onclick="funzNonImplementata();">
+            <div class="data">
+              <img src="profilePic.png" width="88" height="88">
 
-            <div class="workDescription">
-              <p id="typeOfWork">${announcement.typeofwork}</p>
-              <!-- da inserire nome e cognome offerente -->
+              <div class="workDescription">
+                <p id="typeOfWork">${announcement.typeofwork}</p>
+                <p id="offerer">${data2.name} ${data2.surname}</p>
+                
               
-            
-              <li><span>Data:</span> ${announcement.date.day}/${announcement.date.month}/${announcement.date.year}</li>
-              <li><span>Orario:</span> ${announcement.starttime.hour}:${announcement.starttime.minutes}-${announcement.endttime.hour}:${announcement.endttime.minutes}</li>
-              <li><span>Tipo di pagamento:</span> ${announcement.typeofpayment}</li>
-              <li><span>Descrizione:</span> ${announcement.description}</li>
-              
+                <li><span>Data:</span> ${day}/${month}/${announcement.date.year}</li>
+                <li><span>Orario:</span> ${hour1}:${minutes1}-${hour2}:${minutes2}</li>
+                <li><span>Tipo di pagamento:</span> ${announcement.typeofpayment}</li>
+                <li><span>Descrizione:</span> ${announcement.description}</li>
+                
+              </div>
             </div>
-          </div>
 
-          <div class="datiCalcolatiAnnuncio">
-            <p>Persone che hanno visualizzato l'annuncio: <span>
-              <!-- aggiungere numero persone -->
-            </span></p>
-            <p>Richieste di effettuare il lavoro: <span>
-              <!-- aggiungere numero richieste -->  
-            </span></p>
-            <p>Stato: <span>
-              <!-- aggiungere stato -->
-            </span></p>
-          </div>
+            <div class="datiCalcolatiAnnuncio">
+              <p>Persone che hanno visualizzato l'annuncio: <span>
+                0 (non implementato)
+              </span></p>
+              <p>Richieste di effettuare il lavoro: <span>
+                ${announcement.candidates.length}
+              </span></p>
+              <p>Stato: <span>
+                In attesa (non implementato)
+              </span></p>
+            </div>
 
-        </div>`
+          </div>`
 
-        document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+          document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+        })
       });
     })
     .catch(error => console.log(error));
     }
+
+    btn1.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../homepage?token="+access_token+"&email="+email)
+    })
+
+    btn2.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../create?token="+access_token+"&email="+email)
+    })
+
+    btn3.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../profile?token="+access_token+"&email="+email)
+    })
+
+    btn4.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../homepage?token="+access_token+"&email="+email)
+    })
 
     btn5.addEventListener('click', function(e){
       alert("Funzione non ancora implementata");

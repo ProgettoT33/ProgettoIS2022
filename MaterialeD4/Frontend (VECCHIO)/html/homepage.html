@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/html/favicon.ico">
+    <title>Stay Busy</title>
+</head>
+<body onload="showAnnouncement()">
+  <button id="btn1">Annunci di lavoro attivi</button>
+  <button id="btn2">Crea annuncio</button>
+  <button id="btn3">Mostra profilo</button>
+  <h1 class="titolo">Annunci di lavoro</h1>
+  <ul></ul>
+  <button id="logout" type="submit">Logout</button>
+  <script>
+
+    var url = window.location;
+
+    var access_token = new URLSearchParams(url.search).get('token');
+    var email = new URLSearchParams(url.search).get('email');
+
+    btn1.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../homepage?token="+access_token+"&email="+email)
+    })
+
+    btn2.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../create?token="+access_token+"&email="+email)
+    })
+
+    btn3.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../profile?token="+access_token+"&email="+email)
+    })
+
+    const showAnnouncement = () => {
+    fetch('../api/announcement/email?email='+email)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      data.forEach(announcement => {
+        const markup = `
+        <li>${announcement.typeofwork}
+          <ul>
+            <li>Data: ${announcement.date.day}/${announcement.date.month}/${announcement.date.year}</li>
+            <li>Orario: ${announcement.starttime.hour}:${announcement.starttime.minutes}-${announcement.endttime.hour}:${announcement.endttime.minutes}</li>
+            <li>Tipo di pagamento: ${announcement.typeofpayment}</li>
+            <li>Descrizione: ${announcement.description}</li>
+            <li>Email offerente: ${announcement.offereremail}</li>
+          </ul>
+        </li>`
+
+        document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+      });
+    })
+    .catch(error => console.log(error));
+    }
+
+    logout.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../")
+    })
+  </script>
+</body>
+</html>

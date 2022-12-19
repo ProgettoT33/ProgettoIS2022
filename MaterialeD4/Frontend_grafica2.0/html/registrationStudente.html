@@ -56,18 +56,8 @@
     <script>
       const form = document.getElementById('form');
 
-      /*function checkedOnClick(el){
-        // Select all checkboxes by class
-        var checkboxesList = document.getElementsByClassName("scelta");
-        for (var i = 0; i < checkboxesList.length; i++) {
-          checkboxesList.item(i).checked = false; // Uncheck all checkboxes
-        }
-
-        el.checked = true; // Checked clicked checkbox
-      }*/
-
       function registrationOfferente(){
-        location.replace("http://localhost:8080/registration");
+        location.replace("../registration");
       }
 
       function funzNonImplementata(){
@@ -94,8 +84,7 @@
       btn2.addEventListener('click', function(e){
         e.preventDefault();
 
-        //aggiungere collegamento a loginStudente
-        //location.replace("http://localhost:8080/loginStudente");
+        location.replace("../loginStudente");
       })
     
 

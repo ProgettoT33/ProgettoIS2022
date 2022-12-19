@@ -20,7 +20,7 @@
         <div class="cb-container">
           <div class="round blueRound">
             <input type="checkbox" name="student" id="student" class="scelta" >
-            <label for="checkbox" onclick="loginStudente();"></label>
+            <label for="checkbox"></label>
           </div>
           <p>Studente</p>
           </div>
@@ -57,20 +57,10 @@
     <script>
       const form = document.getElementById('form');
 
-      /*function checkedOnClick(el){
-        // Select all checkboxes by class
-        var checkboxesList = document.getElementsByClassName("scelta");
-        for (var i = 0; i < checkboxesList.length; i++) {
-          checkboxesList.item(i).checked = false; // Uncheck all checkboxes
-        }
-
-        el.checked = true; // Checked clicked checkbox
-      }*/
-
       function loginStudente(){
         alert("Attenzione, funzionalità non ancora implementata. E' disponibile solamente il front-end.");
-        //aggiungere re-indirizzamento alla pagina login studente
-        //location.replace("http://localhost:8080/loginStudente");
+        
+        location.replace("../loginStudente");
       }
 
       function funzNonImplementata(){
@@ -85,12 +75,7 @@
         console.log([...payload]);
         
         var checkboxesList = document.getElementsByClassName("scelta");
-        /*if(checkboxesList.item(0).checked === false && checkboxesList.item(1).checked === false){
-          alert("Attenzione, bisogna scegliere il tipo di utente");
-        }else if(checkboxesList.item(0).checked === true){
-          alert("Modalità studente non disponibile");
-        }else{*/
-          fetch('http://localhost:8080/api/offerer/login',{
+          fetch('../api/offerer/login',{
           method : "POST",
           body : payload
         })
@@ -98,7 +83,7 @@
           return res.json().then(data => {
               console.log(data);
             if(data.message === 'OK'){
-              location.replace("http://localhost:8080/homepage?token="+data.token+"&email="+data.email);
+              location.replace("../homepage?token="+data.token+"&email="+data.email);
             }else{
               alert("Attenzione, credenziali errate");
             }
@@ -107,13 +92,12 @@
         .then(data => console.log(data))
         .catch(err => console.log(err));
         }
-     //}
       )
       
       btn2.addEventListener('click', function(e){
       e.preventDefault();
 
-      location.replace("http://localhost:8080/registration")
+      location.replace("../registration")
       })
     </script>
     

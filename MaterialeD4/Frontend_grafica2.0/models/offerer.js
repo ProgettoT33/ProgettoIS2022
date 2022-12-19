@@ -8,7 +8,7 @@ const offererSchema = new mongoose.Schema({
     confirmedaccount : {type : Boolean, default : false},
     password : {type : String, required : true},
     relatedStudentsEmail : [String],
-    averagevotes : {type : Number, default : 0},
+    averagevotes : {type : Number, default : 0.0},
     description : {type : String, default : ""}
 });
 

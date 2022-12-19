@@ -60,7 +60,7 @@
     var email = new URLSearchParams(url.search).get('email');
 
     const showProfile = () => {
-        fetch('http://localhost:8080/api/offerer/emailO?email='+email)
+        fetch('../api/offerer/emailO?email='+email)
         .then(res => {
             return res.json();
         })
@@ -148,13 +148,25 @@
     btn1.addEventListener('click', function(e){
       e.preventDefault();
 
-      location.replace("http://localhost:8080/homepage?token="+access_token+"&email="+email)
+      location.replace("../homepage?token="+access_token+"&email="+email)
     })
 
     btn2.addEventListener('click', function(e){
       e.preventDefault();
 
-      location.replace("http://localhost:8080/create?token="+access_token+"&email="+email)
+      location.replace("../create?token="+access_token+"&email="+email)
+    })
+
+    btn3.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../profile?token="+access_token+"&email="+email)
+    })
+
+    btn4.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../homepage?token="+access_token+"&email="+email)
     })
 
     btn5.addEventListener('click', function(e){
@@ -164,14 +176,14 @@
     btn6.addEventListener('click', function(e){
       e.preventDefault();
 
-      //aggiungere collegamento con profileModify.html
-      //location.replace()
+      location.replace("../modify?token="+access_token+"&email="+email);
     })
 
     btn7.addEventListener('click', function(e){
       e.preventDefault();
 
-      fetch('http://localhost:8080/api/announcement?email='+email, {
+      if(confirm("Sei sicuro di voler cancellare?")){
+        fetch('../api/announcementD?email='+email, {
             method : "DELETE"
         })
         .then(res => {
@@ -185,33 +197,45 @@
             })
             
         })
+      }else{
+      }
+
     })
 
     btn8.addEventListener('click', function(e){
         e.preventDefault();
 
-        fetch('http://localhost:8080/api/offerer/email?email='+email, {
+        if(confirm("Sei sicuro di voler cancellare?")){
+            fetch('../api/offerer/email?email='+email, {
             method : "DELETE"
-        })
-        .then(res => {
-            return res.json().then(data => {
-                console.log(data);
-                if(data.message === "NOT OK"){
-                alert("Non puoi cancellare il tuo account, hai degli annunci ancora attivi");
-                }else{
-                    alert("Account cancellato correttamente");
-                    location.replace('http://localhost:8080/');
-                }
             })
-            
-        })
+            .then(res => {
+                return res.json().then(data => {
+                    console.log(data);
+                    if(data.message === "NOT OK"){
+                    alert("Non puoi cancellare il tuo account, hai degli annunci ancora attivi");
+                    }else{
+                        alert("Account cancellato correttamente");
+                        location.replace('../');
+                    }
+                })
+                
+            })
+      }else{
+      }
+
     })
 
     btn9.addEventListener('click', function(e){
       e.preventDefault();
 
-      location.replace("http://localhost:8080")
+      location.replace("..")
     })
 
+    btn10.addEventListener('click', function(e){
+        e.preventDefault();
+
+        location.replace("../modifypsw?token="+access_token+"&email="+email);
+    })
 </script>
 </html>

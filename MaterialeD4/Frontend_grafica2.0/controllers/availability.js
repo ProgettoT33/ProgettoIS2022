@@ -7,7 +7,6 @@ const getAllAvailability = (req, res, next) => {
     })
 };
 
-
 const newAvailability = (req, res, next) => {
     var hour1 = req.body.hour1;
     var hour2 = req.body.hour2;

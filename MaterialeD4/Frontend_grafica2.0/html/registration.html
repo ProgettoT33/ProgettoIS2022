@@ -71,19 +71,9 @@
     <script>
       const form = document.getElementById('form');
 
-      /*function checkedOnClick(el){
-        // Select all checkboxes by class
-        var checkboxesList = document.getElementsByClassName("scelta");
-        for (var i = 0; i < checkboxesList.length; i++) {
-          checkboxesList.item(i).checked = false; // Uncheck all checkboxes
-        }
-
-        el.checked = true; // Checked clicked checkbox
-      }*/
-
       function registrationStudente(){
         alert("Attenzione, funzionalità non ancora implementata. E' disponibile solamente il front-end.");
-        //location.replace("http://localhost:8080/registrationStudente");
+        location.replace("../registrationStudente");
       }
   
       form.addEventListener('submit', function(e){
@@ -96,15 +86,8 @@
         var checkTerms = document.getElementsByClassName("terms");
         if(checkTerms.item(0).checked == false){
           alert("Bisogna accettare i termini e le condizioni");
-        }/*else{
-          var checkboxesList = document.getElementsByClassName("scelta");
-          if(checkboxesList.item(0).checked === false && checkboxesList.item(1).checked === false){
-            alert("Attenzione, bisogna scegliere il tipo di utente");
-          }else if(checkboxesList.item(0).checked === true){
-            alert("Modalità studente non disponibile");
-          }
-          else{*/
-            fetch('http://localhost:8080/api/offerer',{
+        }else{
+          fetch('../api/offerer',{
             method : "POST",
             body : payload
             })
@@ -112,7 +95,7 @@
               return res.json().then(data => {
                 if(data.message === 'OK'){
                   alert("Benvenuto in Stay Busy, ora effettua il login!");
-                  location.replace("http://localhost:8080")
+                  location.replace("..")
                 }else{
                   alert("Attenzione, i dati inseriti non rispettano gli standard imposti dal sito.");
                 }
@@ -121,16 +104,14 @@
             .then(data => console.log(data))
             .catch(err => console.log(err));
           }
-        //}
-
-        
-      //}
+        }
+            
       )
 
       btn2.addEventListener('click', function(e){
         e.preventDefault();
 
-        location.replace("http://localhost:8080")
+        location.replace("..")
       })
 
     </script>

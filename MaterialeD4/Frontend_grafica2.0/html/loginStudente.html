@@ -53,18 +53,8 @@
     <script>
       const form = document.getElementById('form');
 
-      /*function checkedOnClick(el){
-        // Select all checkboxes by class
-        var checkboxesList = document.getElementsByClassName("scelta");
-        for (var i = 0; i < checkboxesList.length; i++) {
-          checkboxesList.item(i).checked = false; // Uncheck all checkboxes
-        }
-
-        el.checked = true; // Checked clicked checkbox
-      }*/
-
       function loginOfferente(){
-        location.replace("http://localhost:8080/login");
+        location.replace("../login");
       }
       
       function funzNonImplementata(){
@@ -72,11 +62,11 @@
       }
 
       btn2.addEventListener('click', function(e){
-      e.preventDefault();
+        e.preventDefault();
 
-      alert("Attenzione, funzionalità non ancora implementata. E' disponibile solamente il front-end.");
-        //aggiungere re-indirizzamento alla pagina registrazione studente
-        //location.replace("http://localhost:8080/registrationStudente");
+        alert("Attenzione, funzionalità non ancora implementata. E' disponibile solamente il front-end.");
+        
+        location.replace("../registrationStudente");
       
       })
     </script>

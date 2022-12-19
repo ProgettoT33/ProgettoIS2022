@@ -3,7 +3,7 @@ const Student = require("../models/student");
 
 const getAllAnnouncementByEmail = (req, res, next) => {
     Announcement.find({offereremail : req.query.email}, (err, data) => {
-        if(err) return res.json({Error : err});
+        if(err || !data) return res.json({message : "NOT OK"});
         return res.json(data);
     })
 }
@@ -65,12 +65,12 @@ const newAnnouncement = (req, res, next) => {
                 offereremail : req.body.offereremail
             })
             newAnnouncement.save((err, data) => {
-                if(err) return res.json({Error : err});
+                if(err || !data) return res.json({message : "NOT OK"});
                 return res.json({message : "OK"});
             })
         }else{
-            if(err) return res.json("Something went wrong, please try again: " + err);
-            return res.json({message: "Announcement already exists"});
+            if(err || !data) return res.json({message : "NOT OK"});
+            return res.json({message : "NOT OK"});
         }
     })
 };

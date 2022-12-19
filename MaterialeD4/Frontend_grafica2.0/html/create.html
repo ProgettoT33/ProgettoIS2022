@@ -58,39 +58,39 @@
         <h1 class="titolo">Crea un nuovo annuncio</h1> 
         <ul>    
         <form id="form">
-            <div class="datiFormLayout">
-              <h2>Tipo di lavoro</h2>
-              <input type="text" placeholder="Inserisci il tipo di lavoro" id="typeofwork" name="typeofwork" class="text"><br>
-              <h2>Luogo</h2>
-              <input type="text" placeholder="Inserisci il luogo" id="city" name="city" class="text"><br>
-              <h2>Data</h2>
-              <div class="giorno">
-                <input type="number" name="day" id="day" placeholder="Inserisci giorno" class="text">
-                <input type="number" name="month" id="month" placeholder="Inserisci mese" class="text">
-                <input type="number" name="year" id="year" placeholder="Inserisci anno" class="text">
-              </div>
-              <h2>Ora</h2>
-              <div class="oraInizio">
-                <input type="number" name="hour1" id="hour1" placeholder="Inserisci ora inizio" class="text">
-                <input type="number" name="minutes1" id="minutes1" placeholder="Inserisci minuti inizio" class="text">
-              </div>
-              <div class="oraFine">
-                <input type="number" name="hour2" id="hour2" placeholder="Inserisci ora fine" class="text">
-                <input type="number" name="minutes2" id="minutes2" placeholder="Inserisci minuti fine" class="text">
-              </div>
-              <h2>Tipo di pagamento</h2>
-              <select name="typeofpayment" id="typeofpayment" name="typeofpayment" class="text">
-                <option value="" disabled selected>Seleziona il tipo di pagamento</option>  
-                <option value="contanti">Contanti</option>
-                <option value="paypal">Paypal</option>
-              </select><br>
-              <h2>Descrizione del lavoro</h2>
-              <textarea id="description" name="description" placeholder="Inserisci descrizione del lavoro" cols="40" rows="5"></textarea>
+          <div class="datiFormLayout">
+            <h2>Tipo di lavoro</h2>
+            <input type="text" placeholder="Inserisci il tipo di lavoro" id="typeofwork" name="typeofwork" class="text"><br>
+            <h2>Luogo</h2>
+            <input type="text" placeholder="Inserisci il luogo" id="city" name="city" class="text"><br>
+            <h2>Data</h2>
+            <div class="giorno">
+              <input type="number" name="day" id="day" placeholder="Inserisci giorno" class="text">
+              <input type="number" name="month" id="month" placeholder="Inserisci mese" class="text">
+              <input type="number" name="year" id="year" placeholder="Inserisci anno" class="text">
             </div>
-            <div class="bottoniGestioneNuovoAnnuncio">
-              <button type="submit" id="btn6" class="button greyButton">Annulla</button>
-              <button type="submit" id="btn7" class="button blueButton">Crea annuncio</button>
+            <h2>Ora</h2>
+            <div class="oraInizio">
+              <input type="number" name="hour1" id="hour1" placeholder="Inserisci ora inizio" class="text">
+              <input type="number" name="minutes1" id="minutes1" placeholder="Inserisci minuti inizio" class="text">
             </div>
+            <div class="oraFine">
+              <input type="number" name="hour2" id="hour2" placeholder="Inserisci ora fine" class="text">
+              <input type="number" name="minutes2" id="minutes2" placeholder="Inserisci minuti fine" class="text">
+            </div>
+            <h2>Tipo di pagamento</h2>
+            <select name="typeofpayment" id="typeofpayment" name="typeofpayment" class="text">
+              <option value="" disabled selected>Seleziona il tipo di pagamento</option>  
+              <option value="contanti">Contanti</option>
+              <option value="paypal">Paypal</option>
+            </select><br>
+            <h2>Descrizione del lavoro</h2>
+            <textarea id="description" name="description" placeholder="Inserisci descrizione del lavoro" cols="40" rows="5"></textarea>
+          </div>
+          <div class="bottoniGestioneNuovoAnnuncio">
+            <button type="submit" id="btn6" class="button greyButton">Annulla</button>
+            <button type="submit" id="btn7" class="button blueButton">Crea annuncio</button>
+          </div>
           
         </form>
         </ul>
@@ -117,7 +117,7 @@
       payload.append('offereremail', email);
       console.log([...payload]);
 
-      fetch('http://localhost:8080/api/announcement',{
+      fetch('../api/announcement',{
         method : "POST",
         body : payload
       })
@@ -125,7 +125,7 @@
         return res.json().then(data => {
           console.log(data);
           if(data.message === 'OK'){
-            location.replace("http://localhost:8080/homepage?token=" + access_token+"&email="+email)
+            location.replace("../homepage?token=" + access_token+"&email="+email)
           }else{
             alert("Attenzione, i dati inseriti non rispettano gli standard imposti dal sito.");
           }
@@ -136,27 +136,33 @@
         
     })
 
-    btn6.addEventListener('click', function(e){
-      e.preventDefault();
-
-      location.replace("http://localhost:8080/homepage?token=" + access_token+"&email="+email)
-    }); 
-
     btn1.addEventListener('click', function(e){
       e.preventDefault();
 
-      location.replace("http://localhost:8080/homepage?token=" + access_token+"&email="+email)
+      location.replace("../homepage?token=" + access_token+"&email="+email)
     });
 
     btn3.addEventListener('click', function(e){
       e.preventDefault();
 
-      location.replace("http://localhost:8080/profile?token="+access_token+"&email="+email)
+      location.replace("../profile?token="+access_token+"&email="+email)
+    })
+
+    btn4.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../homepage?token="+access_token+"&email="+email)
     })
 
     btn5.addEventListener('click', function(e){
       alert("Funzione non ancora implementata");
     });
+
+    btn6.addEventListener('click', function(e){
+      e.preventDefault();
+
+      location.replace("../homepage?token=" + access_token+"&email="+email)
+    }); 
         
     </script>
 </body>
