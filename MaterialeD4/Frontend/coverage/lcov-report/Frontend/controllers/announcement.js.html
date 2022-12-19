@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50.68% </span>
+                <span class="strong">47.94% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>37/73</span>
+                <span class='fraction'>35/73</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.31% </span>
+                <span class="strong">46.87% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>29/64</span>
+                <span class='fraction'>30/64</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/14</span>
+                <span class='fraction'>6/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.38% </span>
+                <span class="strong">53.84% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>36/65</span>
+                <span class='fraction'>35/65</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -237,33 +237,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -364,8 +364,8 @@ const newAnnouncement = (req, res, next) =&gt; {
 <span class="cstat-no" title="statement not covered" >        return res.json({message : "Wrong day inserted"});</span>
     }
     Announcement.findOne({typeofwork : req.body.typeofwork}, (err, data) =&gt; {
-        if(!data){
-            const newAnnouncement = new Announcement({
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!data){
+            const newAnnouncement = <span class="cstat-no" title="statement not covered" >new Announcement({</span>
                 typeofwork : req.body.typeofwork,
                 city : req.body.city,
                 date : {
@@ -385,13 +385,13 @@ const newAnnouncement = (req, res, next) =&gt; {
                 description : req.body.description,
                 offereremail : req.body.offereremail
             })
-            newAnnouncement.save((err, data) =&gt; {
-                <span class="missing-if-branch" title="else path not taken" >E</span>if(err || <span class="branch-1 cbranch-no" title="branch not covered" >!data)</span> return res.json({message : "NOT OK"});
+<span class="cstat-no" title="statement not covered" >            newAnnouncement.save(<span class="fstat-no" title="function not covered" >(e</span>rr, data) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                if(err || !data) <span class="cstat-no" title="statement not covered" >return res.json({message : "NOT OK"});</span></span>
 <span class="cstat-no" title="statement not covered" >                return res.json({message : "OK"});</span>
             })
-        }else<span class="missing-if-branch" title="else path not taken" >E</span>{
-<span class="cstat-no" title="statement not covered" >            if(err || !data) <span class="cstat-no" title="statement not covered" >return res.json({message : "NOT OK"});</span></span>
-<span class="cstat-no" title="statement not covered" >            return res.json({message : "NOT OK"});</span>
+        }else{
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(err || !data) <span class="cstat-no" title="statement not covered" >return res.json({message : "NOT OK"});</span>
+            return res.json({message : "NOT OK"});
         }
     })
 };
@@ -454,7 +454,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-14T10:45:56.643Z
+                at 2022-12-19T10:18:11.045Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

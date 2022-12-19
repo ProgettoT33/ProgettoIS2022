@@ -3,7 +3,7 @@ const app = require("../server");
 
 describe('Announcement test suite', () => {
     test('tests /api/announcement/email not present', async() => {
-        const response = await request(app).get("/api/announcement/email?email=email@gmail.com");
+        const response = await request(app).get("/api/announcement/email?email=prova@gmail.com");
         expect(response.body).toEqual([]);
     });
     test('tests /api/announcement with wrong email', async() => {
