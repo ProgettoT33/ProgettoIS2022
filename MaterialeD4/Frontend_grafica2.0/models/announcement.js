@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const announcementoffererSchema = new mongoose.Schema({
+const announcementSchema = new mongoose.Schema({
     typeofwork : {type : String, required : true},
     city : {type : String, required : true},
     date : {
@@ -33,5 +33,5 @@ const announcementoffererSchema = new mongoose.Schema({
     workerstudent : String
 });
 
-const Announcementofferer = mongoose.model('Announcementofferer', announcementoffererSchema);
-module.exports = Announcementofferer;
+const Announcement = mongoose.model('Announcement', announcementSchema);
+module.exports = Announcement;

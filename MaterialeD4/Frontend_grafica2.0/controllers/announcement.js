@@ -42,7 +42,7 @@ const newAnnouncement = (req, res, next) => {
     if(day < 1 || day > 31){
         return res.json({message : "Wrong day inserted"});
     }
-    Announcement.findOne({typeofwork : req.body.typeofwork}, (err, data) => {
+    Announcement.findOne({typeofwork : req.body.typeofwork, offereremail : req.body.offereremail}, (err, data) => {
         if(!data){
             const newAnnouncement = new Announcement({
                 typeofwork : req.body.typeofwork,
@@ -86,8 +86,9 @@ const deleteAllAnnouncementByEmail = (req, res, next) => {
 
 const getOneAnnouncement = (req, res, next) => {
     let typeofwork = req.query.typeofwork;
+    let email = req.query.email;
 
-    Announcement.findOne({typeofwork : typeofwork}, (err, data) => {
+    Announcement.findOne({typeofwork : typeofwork, offereremail : email}, (err, data) => {
         if(err || !data) return res.json({message : "Announcement doesn't exist"});
         return res.json(data);
     })
@@ -95,8 +96,9 @@ const getOneAnnouncement = (req, res, next) => {
 
 const printSetOfCandidates = (req, res, next) => {
     let typeofwork = req.query.typeofwork;
+    let email = req.query.email;
 
-    Announcement.findOne({typeofwork : typeofwork}, (err, data) => {
+    Announcement.findOne({typeofwork : typeofwork, offereremail : email}, (err, data) => {
         if(err || !data) return res.json({message : "Announcement doesn't exist"});
         return res.json(data.candidates);
     })
@@ -111,7 +113,7 @@ const addCandidate = (req, res, next) => {
         if(err || !data) return res.json({message : "Student doesn't exist"});
     })
 
-    Announcement.findOne({typeofwork : typeofwork}, (err, data) => {
+    Announcement.findOne({typeofwork : typeofwork, offereremail : email}, (err, data) => {
         if(err || !data) return res.json({message : "Announcement doesn't exist"});
         data.candidates.push({emailcandidate : email});
         data.save();

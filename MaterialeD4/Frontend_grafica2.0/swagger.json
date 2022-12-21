@@ -85,8 +85,8 @@
                         "example":{
                             "typeofuser" : false,
                             "termsaccepted" : true,
-                            "name" : "Riccardo",
-                            "surname" : "Fusiello",
+                            "name" : "Prova Nome",
+                            "surname" : "Prova Cognome",
                             "email" : "prova@gmail.com",
                             "password" : "Prova-1990",
                             "confirmationpassword" : "Prova-1990",
@@ -115,7 +115,7 @@
                 "tags" : [
                     "Offerers"
                 ],
-                "summary" : "Find if there is a offerer with the inserted credentials, if yes it can be logs in",
+                "summary" : "Find if there is a offerer with the inserted credentials, if the request success, login can be done",
                 "parameters": [
                     {
                             "name": "parameterstosent",
@@ -335,6 +335,7 @@
                         "required": true,
                         "type": "object",
                         "example": {
+                            "old" : "Prova-1990",
                             "new" : "Prova-2020",
                             "newnew" : "Prova-2020"
                         }
@@ -392,7 +393,7 @@
                 "tags" : [
                     "Announcements"
                 ],
-                "summary" : "Get the announcement of an offerer by email",
+                "summary" : "Get the announcements of an offerer by email",
                 "parameters": [
                     {
                         "name": "email",
@@ -406,9 +407,6 @@
                 "responses": {
                     "200": {
                         "description": "OK"
-                    },
-                    "404": {
-                        "description": "NOT OK"
                     }
                 }
             }
@@ -446,13 +444,33 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Offerers"
+                            "$ref": "#/definitions/Announcement"
                         }
-                    },
-                    "404": {
-                        "description": "NOT OK",
+                    }
+                }
+            }
+        },
+        "/api/announcementD":{
+            "delete":{
+                "tags" : [
+                    "Announcements"
+                ],
+                "summary" : "Delete the announcements of an offerer by email",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Parameters to be sent",
+                        "required": true,
+                        "type": "string",
+                        "example": "prova@gmail.com"
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
-                            "$ref":"#/definitions/Offerers"
+                            "$ref": "#/definitions/Announcement"
                         }
                     }
                 }
